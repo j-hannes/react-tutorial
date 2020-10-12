@@ -2,7 +2,7 @@
 
 - [ ] add husky + lint-staged
 - [ ] yarn upgrade ?
-- [ ] use FCs
+- [x] replace class components with FCs
 - [x] add unit tests
 - [x] extend eslint config
 - [x] migrate to css modules
