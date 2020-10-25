@@ -5,20 +5,26 @@ import styles from "./Board.module.sass"
 
 type BoardProps = {
   squares: SquareState[]
+  winningLine: number[]
   onClick: (squareIndex: number) => void
 }
 
-export const Board: React.FC<BoardProps> = ({ squares, onClick }) => {
+export const Board: React.FC<BoardProps> = ({
+  squares,
+  winningLine = [],
+  onClick,
+}) => {
   const renderSquare = useCallback(
     (squareIndex: number) => {
       return (
         <Square
+          highlight={winningLine.includes(squareIndex)}
           value={squares[squareIndex]}
           onClick={() => onClick(squareIndex)}
         />
       )
     },
-    [squares, onClick]
+    [squares, winningLine, onClick]
   )
 
   return (

@@ -1,4 +1,5 @@
 import React from "react"
+import clsx from "clsx"
 import styles from "./Square.module.sass"
 
 export enum SquareState {
@@ -9,12 +10,20 @@ export enum SquareState {
 
 type SquareProps = {
   value?: SquareState
+  highlight?: boolean
   onClick: () => void
 }
 
-export const Square: React.FC<SquareProps> = ({ value, onClick }) => {
+export const Square: React.FC<SquareProps> = ({
+  value,
+  highlight,
+  onClick,
+}) => {
   return (
-    <button className={styles.square} onClick={onClick}>
+    <button
+      className={clsx(styles.square, highlight && styles.highlight)}
+      onClick={onClick}
+    >
       {value}
     </button>
   )

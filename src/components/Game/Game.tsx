@@ -16,19 +16,22 @@ const calculateWinner = (squares: SquareState[]) => {
     [2, 4, 6],
   ]
 
-  return lines.reduce((acc, [a, b, c]) => {
-    if (acc) {
-      return acc
-    } else if (
-      squares[a] &&
-      squares[a] === squares[b] &&
-      squares[a] === squares[c]
-    ) {
-      return squares[a]
-    } else {
-      return SquareState.blank
-    }
-  }, SquareState.blank)
+  return lines.reduce(
+    (acc, [a, b, c]) => {
+      if (acc[0]) {
+        return acc
+      } else if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
+        return [squares[a], [a, b, c]]
+      } else {
+        return acc
+      }
+    },
+    [SquareState.blank, [] as number[]]
+  )
 }
 
 const getNextTurn = (value: SquareState) =>
@@ -44,10 +47,9 @@ export const Game: React.FC = () => {
 
   const lastState = history[history.length - 1]
 
-  const winner = calculateWinner(lastState.squares)
+  const [winner, winningLine] = calculateWinner(lastState.squares)
 
   let status
-
   if (winner) {
     status = `Winner: ${winner}`
   } else {
@@ -72,13 +74,17 @@ export const Game: React.FC = () => {
   return (
     <div className={styles.game}>
       <div className={styles.gameBoard}>
-        <Board squares={lastState.squares} onClick={handleClick} />
+        <Board
+          squares={lastState.squares}
+          winningLine={winningLine as number[]}
+          onClick={handleClick}
+        />
       </div>
       <div className={styles.gameInfo}>
         <div className={styles.status}>{status}</div>
         <ol>
           {history.slice(1).map((state, index) => (
-            <li>
+            <li key={index}>
               <button onClick={() => goToStep(index + 1)}>
                 Go to step {index}
               </button>
