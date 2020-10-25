@@ -52,6 +52,8 @@ export const Game: React.FC = () => {
   let status
   if (winner) {
     status = `Winner: ${winner}`
+  } else if (history.length > 9) {
+    status = `Draw!`
   } else {
     status = `Next player: ${lastState.nextTurn}`
   }
