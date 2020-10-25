@@ -1,7 +1,7 @@
 import React from "react"
 import { render } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { Square } from "./Square"
+import { Square, SquareState } from "./Square"
 
 test("renders a button react link", () => {
   const { queryByRole } = render(<Square onClick={() => {}} />)
@@ -10,8 +10,10 @@ test("renders a button react link", () => {
 })
 
 test("renders a value inside a square", () => {
-  const { queryByText } = render(<Square value="O" onClick={() => {}} />)
-  expect(queryByText("O")).not.toBeNull()
+  const { queryByText } = render(
+    <Square value={SquareState.o} onClick={() => {}} />
+  )
+  expect(queryByText(SquareState.o)).not.toBeNull()
 })
 
 test("calls onClick on click", () => {

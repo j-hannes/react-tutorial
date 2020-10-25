@@ -1,47 +1,43 @@
 import React from "react"
 import { render } from "@testing-library/react"
 import { Board } from "./Board"
+import { SquareState } from "../Square"
 import userEvent from "@testing-library/user-event"
 
-test("fills the squares", () => {
+test("renders the squares", () => {
   // Given
-  const { queryAllByRole } = render(<Board />)
+  const { queryAllByText } = render(
+    <Board
+      squares={[
+        SquareState.o,
+        SquareState.blank,
+        SquareState.blank,
+        SquareState.blank,
+        SquareState.x,
+        SquareState.blank,
+        SquareState.blank,
+        SquareState.blank,
+        SquareState.o,
+      ]}
+      onClick={() => {}}
+    />
+  )
 
   // Then
-  expect(queryAllByRole("button")[4]).toHaveTextContent("")
+  expect(queryAllByText(SquareState.x).length).toBe(1)
+  expect(queryAllByText(SquareState.o).length).toBe(2)
+})
+
+test("calls onClick with square index", () => {
+  // Given
+  const onClick = jest.fn()
+  const { queryAllByRole } = render(
+    <Board squares={Array(9).fill(SquareState.blank)} onClick={onClick} />
+  )
 
   // When
   userEvent.click(queryAllByRole("button")[4])
 
   // Then
-  expect(queryAllByRole("button")[4]).toHaveTextContent("X")
-
-  // When
-  userEvent.click(queryAllByRole("button")[8])
-
-  // Then
-  expect(queryAllByRole("button")[8]).toHaveTextContent("O")
-})
-
-test("updates the status", () => {
-  // Given
-  const { queryAllByRole, queryByText } = render(<Board />)
-
-  // Then
-  expect(queryByText("Next player: O")).toBe(null)
-  expect(queryByText("Next player: X")).not.toBe(null)
-
-  // When
-  userEvent.click(queryAllByRole("button")[0])
-
-  // Then
-  expect(queryByText("Next player: O")).not.toBe(null)
-  expect(queryByText("Next player: X")).toBe(null)
-
-  // When
-  userEvent.click(queryAllByRole("button")[1])
-
-  // Then
-  expect(queryByText("Next player: O")).toBe(null)
-  expect(queryByText("Next player: X")).not.toBe(null)
+  expect(onClick).toHaveBeenCalledWith(4)
 })

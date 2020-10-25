@@ -1,8 +1,14 @@
 import React from "react"
 import styles from "./Square.module.sass"
 
+export enum SquareState {
+  blank = "",
+  x = "X",
+  o = "O",
+}
+
 type SquareProps = {
-  value?: string
+  value?: SquareState
   onClick: () => void
 }
 
