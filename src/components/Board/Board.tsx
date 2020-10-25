@@ -18,7 +18,7 @@ export const Board: React.FC<BoardProps> = ({
     (squareIndex: number) => {
       return (
         <Square
-          highlight={winningLine.includes(squareIndex)}
+          won={winningLine.includes(squareIndex)}
           value={squares[squareIndex]}
           onClick={() => onClick(squareIndex)}
         />

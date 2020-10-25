@@ -62,8 +62,8 @@ export const Game: React.FC = () => {
     (squareIndex: number) => {
       if (winner || lastState.squares[squareIndex]) return
       const squares = lastState.squares.slice()
-      const nextTurn = getNextTurn(lastState.nextTurn)
       squares[squareIndex] = lastState.nextTurn
+      const nextTurn = getNextTurn(lastState.nextTurn)
       setHistory((prevState) => [...prevState, { squares, nextTurn }])
     },
     [lastState, winner]

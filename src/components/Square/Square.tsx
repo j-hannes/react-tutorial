@@ -10,18 +10,18 @@ export enum SquareState {
 
 type SquareProps = {
   value?: SquareState
-  highlight?: boolean
+  won?: boolean
   onClick: () => void
 }
 
-export const Square: React.FC<SquareProps> = ({
-  value,
-  highlight,
-  onClick,
-}) => {
+export const Square: React.FC<SquareProps> = ({ value, won, onClick }) => {
   return (
     <button
-      className={clsx(styles.square, highlight && styles.highlight)}
+      className={clsx(
+        styles.square,
+        won && styles.won
+        // value && styles.highlight
+      )}
       onClick={onClick}
     >
       {value}
