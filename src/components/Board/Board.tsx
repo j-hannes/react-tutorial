@@ -1,7 +1,7 @@
 import React from "react"
 import { Square } from "../Square"
 
-import styles from "./Board.module.css"
+import styles from "./Board.module.sass"
 
 export const Board: React.FC = () => {
   function renderSquare(i: number) {

@@ -1,5 +1,5 @@
 import React from "react"
-import styles from "./Square.module.css"
+import styles from "./Square.module.sass"
 
 type SquareProps = {
   value?: number
