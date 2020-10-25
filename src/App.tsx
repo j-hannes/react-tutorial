@@ -1,4 +1,4 @@
-import React from "react";
-import { Game } from "./components";
+import React from "react"
+import { Game } from "./components"
 
-export const App = () => <Game />;
+export const App = () => <Game />

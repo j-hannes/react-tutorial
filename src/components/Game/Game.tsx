@@ -1,7 +1,7 @@
-import React from "react";
-import { Board } from "../Board";
+import React from "react"
+import { Board } from "../Board"
 
-import styles from "./Game.module.css";
+import styles from "./Game.module.css"
 
 export const Game: React.FC = () => {
   return (
@@ -14,5 +14,5 @@ export const Game: React.FC = () => {
         <ol>{/* TODO */}</ol>
       </div>
     </div>
-  );
-};
+  )
+}

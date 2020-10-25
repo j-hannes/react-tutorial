@@ -1,14 +1,14 @@
-import React from "react";
-import { Square } from "../Square";
+import React from "react"
+import { Square } from "../Square"
 
-import styles from "./Board.module.css";
+import styles from "./Board.module.css"
 
 export const Board: React.FC = () => {
   function renderSquare(i: number) {
-    return <Square />;
+    return <Square value={i} />
   }
 
-  const status = "Next player: X";
+  const status = "Next player: X"
 
   return (
     <div>
@@ -29,5 +29,5 @@ export const Board: React.FC = () => {
         {renderSquare(8)}
       </div>
     </div>
-  );
-};
+  )
+}
