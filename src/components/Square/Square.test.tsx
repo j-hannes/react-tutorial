@@ -4,15 +4,20 @@ import userEvent from "@testing-library/user-event"
 import { Square } from "./Square"
 
 test("renders a button react link", () => {
-  const { queryByRole } = render(<Square />)
+  const { queryByRole } = render(<Square onClick={() => {}} />)
   const button = queryByRole("button")
   expect(button).not.toBeNull()
 })
 
-test("renders an X on click a square", () => {
-  const { queryByRole, queryByText } = render(<Square />)
-  const button = queryByRole("button")
-  expect(queryByText("X")).toBe(null)
-  userEvent.click(button)
-  expect(queryByText("X")).not.toBe(null)
+test("renders a value inside a square", () => {
+  const { queryByText } = render(<Square value="O" onClick={() => {}} />)
+  expect(queryByText("O")).not.toBeNull()
+})
+
+test("calls onClick on click", () => {
+  const onClick = jest.fn()
+  const { queryByRole } = render(<Square onClick={onClick} />)
+  expect(onClick).not.toHaveBeenCalled()
+  userEvent.click(queryByRole("button"))
+  expect(onClick).toHaveBeenCalledTimes(1)
 })

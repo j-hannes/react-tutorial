@@ -1,13 +1,15 @@
 import React from "react"
 import styles from "./Square.module.sass"
 
-type SquareProps = {}
+type SquareProps = {
+  value?: string
+  onClick: () => void
+}
 
-export const Square: React.FC<SquareProps> = () => {
-  const [state, setState] = React.useState({ value: "" })
+export const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   return (
-    <button className={styles.square} onClick={() => setState({ value: "X" })}>
-      {state.value}
+    <button className={styles.square} onClick={onClick}>
+      {value}
     </button>
   )
 }

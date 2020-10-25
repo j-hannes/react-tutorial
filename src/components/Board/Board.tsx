@@ -1,12 +1,31 @@
-import React from "react"
+import React, { useCallback, useState } from "react"
 import { Square } from "../Square"
 
 import styles from "./Board.module.sass"
 
 export const Board: React.FC = () => {
-  function renderSquare(i: number) {
-    return <Square />
-  }
+  const [squares, setSquares] = useState(Array(9).fill(""))
+
+  const handleClick = useCallback(
+    (squareIndex: number) => {
+      const nextSquares = squares.slice()
+      nextSquares[squareIndex] = "X"
+      setSquares(nextSquares)
+    },
+    [squares]
+  )
+
+  const renderSquare = useCallback(
+    (squareIndex: number) => {
+      return (
+        <Square
+          value={squares[squareIndex]}
+          onClick={() => handleClick(squareIndex)}
+        />
+      )
+    },
+    [squares, handleClick]
+  )
 
   const status = "Next player: X"
 
