@@ -5,14 +5,16 @@ import styles from "./Board.module.sass"
 
 export const Board: React.FC = () => {
   const [squares, setSquares] = useState(Array(9).fill(""))
+  const [nextTurn, setNextTurn] = useState("X")
 
   const handleClick = useCallback(
     (squareIndex: number) => {
       const nextSquares = squares.slice()
-      nextSquares[squareIndex] = "X"
+      nextSquares[squareIndex] = nextTurn
       setSquares(nextSquares)
+      setNextTurn(nextTurn === "O" ? "X" : "O")
     },
-    [squares]
+    [squares, nextTurn]
   )
 
   const renderSquare = useCallback(
@@ -27,7 +29,7 @@ export const Board: React.FC = () => {
     [squares, handleClick]
   )
 
-  const status = "Next player: X"
+  const status = `Next player: ${nextTurn}`
 
   return (
     <div>
